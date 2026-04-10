@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa de Campo 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green:       #1D9E75;
+  --green-dk:    #085041;
+  --green-deep:  #0B3D2E;
+  --green-mid:   #1E7A40;
+  --green-lt:    #E1F5EE;
+  --teal:        #1A7D9E;
+  --gold:        #F5A623;
+  --gold-dk:     #BA7517;
+  --gold-lt:     #FAEEDA;
+  --sand:        #F4F1EA;
+  --sand-dk:     #E5E0D5;
+  --ink:         #1C1C1A;
+  --ink-mid:     #5F5E5A;
+  --ink-lt:      #B4B2A9;
+  --white:       #FFFFFF;
+  --red:         #A32D2D;
+  --red-lt:      #FCEBEB;
+  --blue-lt:     #E6F1FB;
+  --blue:        #185FA5;
+  --radius:      12px;
+  --radius-sm:   8px;
+  --shadow:      0 1px 3px rgba(0,0,0,0.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--sand);
+  color: var(--ink);
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ── COVER ART ── */
+.cover { width: 100%; display: block; }
+
+/* ── NAV TABS ── */
+.nav {
+  background: var(--green-deep);
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.nav::-webkit-scrollbar { display: none; }
+.nav-btn {
+  flex: 1;
+  min-width: 80px;
+  padding: 14px 10px;
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,0.55);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-btn:hover { color: rgba(255,255,255,0.85); }
+.nav-btn.active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+/* ── MAIN LAYOUT ── */
+.page { display: none; padding: 1.25rem 1rem 3rem; max-width: 720px; margin: 0 auto; }
+.page.active { display: block; }
+
+/* ── SECTION TITLE ── */
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--green-deep);
+  margin-bottom: 1rem;
+}
+
+/* ── DAY CARDS ── */
+.day-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 0.5px solid var(--sand-dk);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.day-head {
+  background: var(--green-deep);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.day-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px;
+  color: var(--gold);
+  line-height: 1;
+  min-width: 36px;
+}
+.day-info { flex: 1; }
+.day-name { font-size: 14px; font-weight: 500; color: white; }
+.day-date { font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+.day-badge {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+.badge-golf { background: var(--green-lt); color: var(--green-dk); }
+.badge-libre { background: var(--blue-lt); color: var(--blue); }
+.badge-viaje { background: var(--gold-lt); color: var(--gold-dk); }
+
+.day-body { padding: 0 16px 12px; }
+.sched-row {
+  display: flex;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 0.5px solid var(--sand-dk);
+  align-items: flex-start;
+}
+.sched-row:last-child { border-bottom: none; }
+.sched-time {
+  font-size: 11px;
+  color: var(--ink-mid);
+  min-width: 42px;
+  padding-top: 2px;
+  font-weight: 500;
+}
+.sched-main { flex: 1; }
+.sched-text { font-size: 13px; color: var(--ink); }
+.sched-sub { font-size: 11px; color: var(--ink-lt); margin-top: 2px; }
+.rest-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--green-lt);
+  border: 0.5px solid #9FE1CB;
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 11px;
+  color: var(--green-dk);
+  margin-top: 5px;
+}
+.rest-pill .stars { color: var(--gold-dk); font-size: 10px; }
+.warn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--gold-lt);
+  border: 0.5px solid #FAC775;
+  border-radius: 20px;
+  padding: 2px 8px;
+  font-size: 10px;
+  color: var(--gold-dk);
+  margin-top: 3px;
+}
+
+/* ── RESTAURANT CARDS ── */
+.rest-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+@media(max-width:520px){ .rest-grid { grid-template-columns: 1fr; } }
+.rest-card {
+  background: var(--white);
+  border: 0.5px solid var(--sand-dk);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+.rest-card.featured { border: 2px solid var(--green); }
+.rest-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
+.rest-card-name { font-size: 15px; font-weight: 500; color: var(--ink); }
+.rest-stars { font-size: 12px; color: var(--gold-dk); }
+.rest-cuisine { font-size: 12px; color: var(--ink-lt); margin-bottom: 10px; }
+.rest-meta { font-size: 12px; color: var(--ink-mid); padding: 3px 0; display: flex; gap: 8px; }
+.rest-label { color: var(--ink-lt); min-width: 68px; }
+.rest-val { color: var(--ink); }
+.rest-warn { color: var(--gold-dk); }
+.rest-day-tag {
+  margin-top: 10px;
+  display: inline-block;
+  background: var(--green-lt);
+  color: var(--green-dk);
+  font-size: 10px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+}
+
+/* ── SCORES ── */
+.rounds-nav {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.round-btn {
+  padding: 7px 14px;
+  font-size: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  border: 0.5px solid var(--sand-dk);
+  border-radius: 20px;
+  cursor: pointer;
+  background: var(--white);
+  color: var(--ink-mid);
+  transition: all 0.15s;
+}
+.round-btn.active {
+  background: var(--green-deep);
+  color: white;
+  border-color: var(--green-deep);
+}
+
+.score-wrap {
+  background: var(--white);
+  border: 0.5px solid var(--sand-dk);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.score-table { width: 100%; border-collapse: collapse; }
+.score-table th {
+  text-align: left;
+  padding: 10px 12px;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--ink-lt);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 0.5px solid var(--sand-dk);
+  background: var(--sand);
+}
+.score-table td {
+  padding: 0;
+  border-bottom: 0.5px solid var(--sand-dk);
+}
+.score-table tr:last-child td { border-bottom: none; }
+.score-cell {
+  padding: 10px 12px;
+  font-size: 13px;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.score-pos { font-size: 11px; color: var(--ink-lt); font-weight: 500; min-width: 18px; }
+.score-avatar {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 500;
+  flex-shrink: 0;
+}
+.score-name { font-weight: 500; flex: 1; }
+.score-num { font-size: 13px; font-weight: 500; text-align: center; min-width: 36px; }
+.score-diff { font-size: 12px; font-weight: 500; text-align: right; min-width: 36px; }
+.under { color: #1D9E75; }
+.over  { color: var(--red); }
+.even  { color: var(--ink-lt); }
+
+/* SCORE EDITOR */
+.edit-score-input {
+  width: 56px;
+  padding: 4px 6px;
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  border: 1px solid var(--sand-dk);
+  border-radius: 6px;
+  text-align: center;
+  color: var(--ink);
+  background: var(--sand);
+  outline: none;
+}
+.edit-score-input:focus { border-color: var(--green); background: white; }
+
+.edit-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.btn-edit {
+  padding: 7px 16px;
+  font-size: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  border: 0.5px solid var(--green);
+  border-radius: 20px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--green);
+  transition: all 0.15s;
+}
+.btn-edit.active {
+  background: var(--green);
+  color: white;
+}
+.btn-save {
+  padding: 7px 16px;
+  font-size: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  border: 0.5px solid var(--green-dk);
+  border-radius: 20px;
+  cursor: pointer;
+  background: var(--green-deep);
+  color: white;
+  display: none;
+}
+.btn-save.show { display: inline-block; }
+
+.edit-hint {
+  font-size: 11px;
+  color: var(--ink-lt);
+  padding: 6px 12px 10px;
+}
+
+/* ── RANKING ── */
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 1.25rem;
+}
+@media(max-width:400px){ .metrics-row { grid-template-columns: 1fr 1fr; } }
+.metric-card {
+  background: var(--white);
+  border: 0.5px solid var(--sand-dk);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+}
+.metric-label { font-size: 10px; color: var(--ink-lt); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.metric-val { font-size: 20px; font-weight: 500; color: var(--ink); }
+.metric-sub { font-size: 10px; color: var(--ink-lt); margin-top: 2px; }
+
+.rank-list { background: var(--white); border: 0.5px solid var(--sand-dk); border-radius: var(--radius); overflow: hidden; }
+.rank-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 0.5px solid var(--sand-dk);
+  transition: background 0.1s;
+}
+.rank-row:last-child { border-bottom: none; }
+.rank-row:hover { background: var(--sand); }
+.rank-pos {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  color: var(--ink-lt);
+  min-width: 32px;
+  text-align: center;
+}
+.rank-pos.gold   { color: var(--gold); }
+.rank-pos.silver { color: #888780; }
+.rank-pos.bronze { color: #993C1D; }
+.rank-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 500;
+  flex-shrink: 0;
+}
+.rank-info { flex: 1; min-width: 0; }
+.rank-name { font-size: 14px; font-weight: 500; color: var(--ink); }
+.rank-sub { font-size: 11px; color: var(--ink-lt); margin-top: 2px; }
+.rank-bar-wrap { height: 3px; background: var(--sand-dk); border-radius: 2px; margin-top: 5px; }
+.rank-bar { height: 3px; border-radius: 2px; background: var(--green); }
+.rank-total { font-size: 18px; font-weight: 500; min-width: 44px; text-align: right; }
+.rank-total.lead { color: var(--green-dk); }
+.rank-total.trail { color: var(--ink-mid); }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--green-deep);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: transform 0.3s;
+  z-index: 200;
+  white-space: nowrap;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 11px;
+  color: var(--ink-lt);
+  letter-spacing: 0.5px;
+}
+</style>
+</head>
+<body>
+
+<!-- COVER ART -->
+<svg class="cover" viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg">
+  <rect width="680" height="340" fill="#0B3D2E"/>
+  <rect x="0" y="0" width="680" height="160" fill="#0D4A35"/>
+  <rect x="0" y="0" width="680" height="90" fill="#0A3C2C"/>
+  <circle cx="540" cy="72" r="40" fill="#F5A623"/>
+  <circle cx="540" cy="72" r="32" fill="#F7C05A"/>
+  <circle cx="540" cy="72" r="24" fill="#FBD98A"/>
+  <g stroke="#F7C05A" stroke-width="1.2" opacity="0.45">
+    <line x1="540" y1="20" x2="540" y2="8"/>
+    <line x1="540" y1="136" x2="540" y2="148"/>
+    <line x1="488" y1="72" x2="476" y2="72"/>
+    <line x1="592" y1="72" x2="604" y2="72"/>
+    <line x1="503" y1="35" x2="494" y2="26"/>
+    <line x1="577" y1="109" x2="586" y2="118"/>
+    <line x1="577" y1="35" x2="586" y2="26"/>
+    <line x1="503" y1="109" x2="494" y2="118"/>
+  </g>
+  <rect x="0" y="148" width="680" height="55" fill="#1B6B8A"/>
+  <rect x="0" y="168" width="680" height="38" fill="#1D91B5"/>
+  <g stroke="#4AB8D4" stroke-width="0.8" opacity="0.35">
+    <line x1="360" y1="175" x2="580" y2="175"/>
+    <line x1="390" y1="183" x2="640" y2="183"/>
+    <line x1="350" y1="191" x2="610" y2="191"/>
+  </g>
+  <rect x="0" y="195" width="680" height="145" fill="#1D6B3A"/>
+  <rect x="0" y="215" width="680" height="125" fill="#22894A"/>
+  <g opacity="0.12">
+    <rect x="0"   y="215" width="68" height="125" fill="#3AAD5E"/>
+    <rect x="136" y="215" width="68" height="125" fill="#3AAD5E"/>
+    <rect x="272" y="215" width="68" height="125" fill="#3AAD5E"/>
+    <rect x="408" y="215" width="68" height="125" fill="#3AAD5E"/>
+    <rect x="544" y="215" width="68" height="125" fill="#3AAD5E"/>
+  </g>
+  <ellipse cx="185" cy="300" rx="50" ry="15" fill="#C8A96A"/>
+  <ellipse cx="470" cy="285" rx="36" ry="11" fill="#C8A96A"/>
+  <line x1="118" y1="225" x2="118" y2="260" stroke="#D4D4D4" stroke-width="1.5"/>
+  <polygon points="118,225 140,232 118,239" fill="#E8003D"/>
+  <line x1="555" y1="210" x2="555" y2="242" stroke="#D4D4D4" stroke-width="1.5"/>
+  <polygon points="555,210 577,217 555,224" fill="#E8003D"/>
+  <!-- Palm L -->
+  <line x1="55" y1="340" x2="63" y2="195" stroke="#3D2B1F" stroke-width="5"/>
+  <line x1="63" y1="195" x2="67" y2="145" stroke="#3D2B1F" stroke-width="4"/>
+  <path d="M65 150 Q38 132 8 137" stroke="#2D6B35" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M65 150 Q46 122 42 99"  stroke="#2D6B35" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M65 150 Q80 122 93 110" stroke="#2D6B35" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M65 150 Q94 138 115 133" stroke="#2D6B35" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <circle cx="62" cy="158" r="5" fill="#8B6914"/>
+  <circle cx="70" cy="161" r="4.5" fill="#7A5C10"/>
+  <!-- Palm R -->
+  <line x1="634" y1="340" x2="626" y2="198" stroke="#3D2B1F" stroke-width="5"/>
+  <line x1="626" y1="198" x2="622" y2="148" stroke="#3D2B1F" stroke-width="4"/>
+  <path d="M624 153 Q652 133 672 138" stroke="#2D6B35" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M624 153 Q641 123 642 100" stroke="#2D6B35" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M624 153 Q604 124 590 112" stroke="#2D6B35" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M624 153 Q598 140 574 136" stroke="#2D6B35" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <circle cx="628" cy="161" r="5" fill="#8B6914"/>
+  <circle cx="620" cy="163" r="4.5" fill="#7A5C10"/>
+  <!-- Palm C -->
+  <line x1="340" y1="280" x2="344" y2="185" stroke="#3D2B1F" stroke-width="3"/>
+  <path d="M342 188 Q320 174 305 178" stroke="#2D6B35" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M342 188 Q334 168 336 152" stroke="#2D6B35" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M342 188 Q358 172 370 175" stroke="#2D6B35" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="340" cy="194" r="3.5" fill="#8B6914"/>
+  <!-- Birds -->
+  <path d="M195 108 Q202 102 209 108" stroke="#C8E8D0" stroke-width="1.2" fill="none"/>
+  <path d="M215 96  Q222 90  229 96"  stroke="#C8E8D0" stroke-width="1.2" fill="none"/>
+  <path d="M240 112 Q246 106 252 112" stroke="#C8E8D0" stroke-width="1.2" fill="none"/>
+  <!-- Golf ball -->
+  <circle cx="336" cy="323" r="7" fill="#FAFAFA"/>
+  <circle cx="333" cy="320" r="1" fill="#DDD"/>
+  <circle cx="338" cy="319" r="1" fill="#DDD"/>
+  <circle cx="335" cy="325" r="1" fill="#DDD"/>
+  <!-- Title panel -->
+  <rect x="155" y="250" width="370" height="78" rx="8" fill="#0B3D2E" opacity="0.78"/>
+  <line x1="188" y1="266" x2="492" y2="266" stroke="#F5A623" stroke-width="0.8" opacity="0.8"/>
+  <text x="340" y="290" text-anchor="middle" font-family="Georgia,serif" font-size="26" font-weight="400" fill="#FEFCF4" letter-spacing="2">Casa de Campo</text>
+  <text x="340" y="309" text-anchor="middle" font-family="'DM Sans',Arial,sans-serif" font-size="10" font-weight="400" fill="#9FE1CB" letter-spacing="3.5">GOLF TRIP · ABRIL 2026 · LA ROMANA, DO</text>
+  <line x1="188" y1="318" x2="492" y2="318" stroke="#F5A623" stroke-width="0.8" opacity="0.8"/>
+  <circle cx="188" cy="266" r="2.5" fill="#F5A623"/>
+  <circle cx="492" cy="266" r="2.5" fill="#F5A623"/>
+  <circle cx="188" cy="318" r="2.5" fill="#F5A623"/>
+  <circle cx="492" cy="318" r="2.5" fill="#F5A623"/>
+</svg>
+
+<!-- NAV -->
+<nav class="nav">
+  <button class="nav-btn active" onclick="showPage('itinerario',this)">Itinerario</button>
+  <button class="nav-btn" onclick="showPage('restaurantes',this)">Restaurantes</button>
+  <button class="nav-btn" onclick="showPage('scores',this)">Scores</button>
+  <button class="nav-btn" onclick="showPage('ranking',this)">Ranking</button>
+</nav>
+
+<!-- ════════════════ ITINERARIO ════════════════ -->
+<div id="itinerario" class="page active">
+  <p class="section-title">Itinerario</p>
+
+  <!-- D1 -->
+  <div class="day-card">
+    <div class="day-head">
+      <div class="day-num">16</div>
+      <div class="day-info">
+        <div class="day-name">Llegada</div>
+        <div class="day-date">Jueves 16 de abril</div>
+      </div>
+      <span class="day-badge badge-viaje">Viaje</span>
+    </div>
+    <div class="day-body">
+      <div class="sched-row">
+        <div class="sched-time">15:20</div>
+        <div class="sched-main">
+          <div class="sched-text">Transfer in — Aeropuerto Punta Cana (PUJ)</div>
+          <div class="sched-sub">Confirmación: 1627769</div>
+        </div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">16:00</div>
+        <div class="sched-main">
+          <div class="sched-text">Check in — Casa de Campo Resort &amp; Villas</div>
+          <div class="sched-sub">Habitación doble elite · Full board incluido · 6 noches</div>
+        </div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">19:00</div>
+        <div class="sched-main">
+          <div class="sched-text">Reunión de grupo — Bar</div>
+        </div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">20:00</div>
+        <div class="sched-main">
+          <div class="sched-text">Cena</div>
+          <div><span class="rest-pill">La Caña <span class="stars">★★★★</span> · A pie · Polo / collared shirt</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D2 -->
+  <div class="day-card">
+    <div class="day-head">
+      <div class="day-num">17</div>
+      <div class="day-info">
+        <div class="day-name">Golf — The Links</div>
+        <div class="day-date">Viernes 17 de abril</div>
+      </div>
+      <span class="day-badge badge-golf">Golf</span>
+    </div>
+    <div class="day-body">
+      <div class="sched-row">
+        <div class="sched-time">07:15</div>
+        <div class="sched-main">
+          <div class="sched-text">Desayuno — Lago Restaurant</div>
+          <div class="sched-sub">Buffet frente al hoyo 18 · Sin reserva · 6:30am–11am</div>
+        </div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">09:09</div>
+        <div class="sched-main">
+          <div class="sched-text">Tee time — The Links</div>
+          <div class="sched-sub">Tee times: 9:09 / 9:18 / 9:27 hs · Conf. 80649388 · 6,700 yds</div>
+        </div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">13:30</div>
+        <div class="sched-main"><div class="sched-text">Fin de golf — Hoyo 19</div></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">15:00</div>
+        <div class="sched-main"><div class="sched-text">Relax — Piscina</div></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">19:00</div>
+        <div class="sched-main"><div class="sched-text">Reunión previa — Bar</div></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">20:00</div>
+        <div class="sched-main">
+          <div class="sched-text">Cena</div>
+          <div><span class="rest-pill">La Casita <span class="stars">★★★★</span> · Marina · Casual elegance</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D3 -->
+  <div class="day-card">
+    <div class="day-head">
+      <div class="day-num">18</div>
+      <div class="day-info">
+        <div class="day-name">Día Libre</div>
+        <div class="day-date">Sábado 18 de abril</div>
+      </div>
+      <span class="day-badge badge-libre">Libre</span>
+    </div>
+    <div class="day-body">
+      <div class="sched-row">
+        <div class="sched-time">13:00</div>
+        <div class="sched-main">
+          <div class="sched-text">Visita — Altos de Chavón</div>
+          <div class="sched-sub">Pueblo medieval, galerías, vistas al Río Chavón</div>
+        </div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">19:00</div>
+        <div class="sched-main"><div class="sched-text">Previos — Bar</div></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">20:00</div>
+        <div class="sched-main">
+          <div class="sched-text">Cena especial</div>
+          <div><span class="rest-pill">La Piazzetta <span class="stars">★★★★★</span> · Altos de Chavón · Golf cart 15 min</span></div>
+          <div><span class="warn-pill">⚠ Pantalón largo obligatorio para hombres</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D4 -->
+  <div class="day-card">
+    <div class="day-head">
+      <div class="day-num">19</div>
+      <div class="day-info">
+        <div class="day-name">Golf — Teeth of the Dog</div>
+        <div class="day-date">Domingo 19 de abril</div>
+      </div>
+      <span class="day-badge badge-golf">Golf</span>
+    </div>
+    <div class="day-body">
+      <div class="sched-row">
+        <div class="sched-time">07:15</div>
+        <div class="sched-main">
+          <div class="sched-text">Desayuno — Lago Restaurant</div>
+        </div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">09:09</div>
+        <div class="sched-main">
+          <div class="sched-text">Tee time — Teeth of the Dog</div>
+          <div class="sched-sub">Tee times: 9:09 / 9:18 / 9:27 hs · Conf. 80649388 · Campo #1 del Caribe</div>
+          <div><span class="warn-pill">⚠ Caddie obligatorio — se paga en destino</span></div>
+        </div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">13:30</div>
+        <div class="sched-main"><div class="sched-text">Fin de golf — Hoyo 19</div></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">15:00</div>
+        <div class="sched-main"><div class="sched-text">Relax — Piscina</div></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">19:00</div>
+        <div class="sched-main"><div class="sched-text">Previos — Bar</div></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">20:00</div>
+        <div class="sched-main">
+          <div class="sched-text">Cena</div>
+          <div><span class="rest-pill">La Caña <span class="stars">★★★★</span> · A pie · Polo / collared shirt</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D5 -->
+  <div class="day-card">
+    <div class="day-head">
+      <div class="day-num">20</div>
+      <div class="day-info">
+        <div class="day-name">Golf — Dye Fore</div>
+        <div class="day-date">Lunes 20 de abril</div>
+      </div>
+      <span class="day-badge badge-golf">Golf</span>
+    </div>
+    <div class="day-body">
+      <div class="sched-row">
+        <div class="sched-time">07:30</div>
+        <div class="sched-main"><div class="sched-text">Desayuno — Lago Restaurant</div></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">09:40</div>
+        <div class="sched-main">
+          <div class="sched-text">Tee time — Dye Fore</div>
+          <div class="sched-sub">Tee times: 9:40 / 9:50 / 10:00 hs · Conf. 80649388 · 7,714 yds · Vistas al Río Chavón</div>
+          <div><span class="warn-pill">⚠ Caddie obligatorio — se paga en destino</span></div>
+        </div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">14:00</div>
+        <div class="sched-main"><div class="sched-text">Fin de golf — Hoyo 19</div></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">15:00</div>
+        <div class="sched-main"><div class="sched-text">Relax — Piscina</div></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">19:00</div>
+        <div class="sched-main"><div class="sched-text">Previos — Bar</div></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">20:00</div>
+        <div class="sched-main">
+          <div class="sched-text">Cena</div>
+          <div><span class="rest-pill">SBG <span class="stars">★★★★★</span> · Marina · Casual elegance · DJ en vivo</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D6 -->
+  <div class="day-card">
+    <div class="day-head">
+      <div class="day-num">21</div>
+      <div class="day-info">
+        <div class="day-name">Golf — Teeth of the Dog</div>
+        <div class="day-date">Martes 21 de abril</div>
+      </div>
+      <span class="day-badge badge-golf">Golf</span>
+    </div>
+    <div class="day-body">
+      <div class="sched-row">
+        <div class="sched-time">07:15</div>
+        <div class="sched-main"><div class="sched-text">Desayuno — Lago Restaurant</div></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">09:09</div>
+        <div class="sched-main">
+          <div class="sched-text">Tee time — Teeth of the Dog</div>
+          <div class="sched-sub">Tee times: 9:09 / 9:18 / 9:27 hs · Conf. 80649388</div>
+          <div><span class="warn-pill">⚠ Caddie obligatorio — se paga en destino</span></div>
+        </div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">13:30</div>
+        <div class="sched-main"><div class="sched-text">Fin de golf — Hoyo 19</div></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">15:00</div>
+        <div class="sched-main"><div class="sched-text">Relax — Piscina</div></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">19:00</div>
+        <div class="sched-main"><div class="sched-text">Previos — Bar</div></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-time">20:00</div>
+        <div class="sched-main">
+          <div class="sched-text">Última cena</div>
+          <div><span class="rest-pill">Causa <span class="stars">★★★★</span> · Marina · Casual · Peruana</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D7 -->
+  <div class="day-card">
+    <div class="day-head">
+      <div class="day-num">22</div>
+      <div class="day-info">
+        <div class="day-name">Salida</div>
+        <div class="day-date">Miércoles 22 de abril</div>
+      </div>
+      <span class="day-badge badge-viaje">Viaje</span>
+    </div>
+    <div class="day-body">
+      <div class="sched-row">
+        <div class="sched-time">05:00</div>
+        <div class="sched-main">
+          <div class="sched-text">Inicio de check out</div>
+          <div class="sched-sub">Transfer al aeropuerto de Punta Cana (PUJ)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Emergency info -->
+  <div style="background:var(--white);border:0.5px solid var(--sand-dk);border-radius:var(--radius);padding:14px 16px;margin-top:4px;">
+    <div style="font-size:11px;color:var(--ink-lt);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Contacto de emergencia</div>
+    <div style="font-size:14px;font-weight:500;color:var(--ink);">Andrés Fernando Arispe Oviedo</div>
+    <div style="font-size:13px;color:var(--green-dk);margin-top:2px;">+54 911 5663 0464</div>
+    <div style="font-size:11px;color:var(--ink-lt);margin-top:6px;">Tour leader · WeGolf</div>
+  </div>
+</div>
+
+<!-- ════════════════ RESTAURANTES ════════════════ -->
+<div id="restaurantes" class="page">
+  <p class="section-title">Restaurantes</p>
+  <div class="rest-grid">
+
+    <div class="rest-card">
+      <div class="rest-card-top">
+        <div class="rest-card-name">La Caña</div>
+        <div class="rest-stars">★★★★</div>
+      </div>
+      <div class="rest-cuisine">Francesa / mediterránea · Hotel</div>
+      <div class="rest-meta"><span class="rest-label">Horario</span><span class="rest-val">Cena 6–11pm</span></div>
+      <div class="rest-meta"><span class="rest-label">Vestimenta</span><span class="rest-val">Polo, collared shirt, golf shorts, zapato cerrado</span></div>
+      <div class="rest-meta"><span class="rest-label">Reserva</span><span class="rest-val">Recomendada</span></div>
+      <div class="rest-meta"><span class="rest-label">Traslado</span><span class="rest-val">A pie desde lobby</span></div>
+      <span class="rest-day-tag">Jue 16 y Dom 19</span>
+    </div>
+
+    <div class="rest-card">
+      <div class="rest-card-top">
+        <div class="rest-card-name">La Casita</div>
+        <div class="rest-stars">★★★★</div>
+      </div>
+      <div class="rest-cuisine">Mariscos / española / tapas · Marina</div>
+      <div class="rest-meta"><span class="rest-label">Horario</span><span class="rest-val">Cena 6–11pm todos los días</span></div>
+      <div class="rest-meta"><span class="rest-label">Vestimenta</span><span class="rest-val">Casual elegance</span></div>
+      <div class="rest-meta"><span class="rest-label">Reserva</span><span class="rest-val">Recomendada</span></div>
+      <div class="rest-meta"><span class="rest-label">Traslado</span><span class="rest-warn">Golf cart + shuttle ~20 min</span></div>
+      <span class="rest-day-tag">Vie 17</span>
+    </div>
+
+    <div class="rest-card featured">
+      <div class="rest-card-top">
+        <div class="rest-card-name">La Piazzetta</div>
+        <div class="rest-stars">★★★★★</div>
+      </div>
+      <div class="rest-cuisine">Italiana gourmet · Altos de Chavón</div>
+      <div class="rest-meta"><span class="rest-label">Horario</span><span class="rest-val">Cena 6–11pm todos los días</span></div>
+      <div class="rest-meta"><span class="rest-label">Vestimenta</span><span class="rest-warn">Collared shirt + pantalón largo ⚠️</span></div>
+      <div class="rest-meta"><span class="rest-label">Reserva</span><span class="rest-val">Recomendada</span></div>
+      <div class="rest-meta"><span class="rest-label">Traslado</span><span class="rest-warn">Golf cart ~15 min, subida</span></div>
+      <span class="rest-day-tag">Sáb 18 — cena especial</span>
+    </div>
+
+    <div class="rest-card featured">
+      <div class="rest-card-top">
+        <div class="rest-card-name">SBG</div>
+        <div class="rest-stars">★★★★★</div>
+      </div>
+      <div class="rest-cuisine">Internacional / mediterránea / sushi · Marina</div>
+      <div class="rest-meta"><span class="rest-label">Horario</span><span class="rest-val">Lun–Vie 5–11pm / Sáb–Dom 11am–11pm</span></div>
+      <div class="rest-meta"><span class="rest-label">Vestimenta</span><span class="rest-val">Casual elegance</span></div>
+      <div class="rest-meta"><span class="rest-label">Reserva</span><span class="rest-val">Recomendada</span></div>
+      <div class="rest-meta"><span class="rest-label">Traslado</span><span class="rest-warn">Golf cart + shuttle ~20 min</span></div>
+      <span class="rest-day-tag">Lun 20 — DJ / banda en vivo</span>
+    </div>
+
+    <div class="rest-card">
+      <div class="rest-card-top">
+        <div class="rest-card-name">Causa</div>
+        <div class="rest-stars">★★★★</div>
+      </div>
+      <div class="rest-cuisine">Peruana — criolla / nikkei / chifa · Marina</div>
+      <div class="rest-meta"><span class="rest-label">Horario</span><span class="rest-val">5–11pm todos los días</span></div>
+      <div class="rest-meta"><span class="rest-label">Vestimenta</span><span class="rest-val">Casual (el más libre)</span></div>
+      <div class="rest-meta"><span class="rest-label">Reserva</span><span class="rest-val">Recomendada</span></div>
+      <div class="rest-meta"><span class="rest-label">Traslado</span><span class="rest-warn">Golf cart + shuttle ~20 min</span></div>
+      <span class="rest-day-tag">Mar 21 — última noche</span>
+    </div>
+
+    <div class="rest-card">
+      <div class="rest-card-top">
+        <div class="rest-card-name">Lago</div>
+        <div class="rest-stars">★★★</div>
+      </div>
+      <div class="rest-cuisine">Buffet dominicano · Hotel</div>
+      <div class="rest-meta"><span class="rest-label">Horario</span><span class="rest-val">6:30–11am desayuno · –3pm almuerzo</span></div>
+      <div class="rest-meta"><span class="rest-label">Vestimenta</span><span class="rest-val">Casual (sin traje de baño)</span></div>
+      <div class="rest-meta"><span class="rest-label">Reserva</span><span class="rest-val">No requiere</span></div>
+      <div class="rest-meta"><span class="rest-label">Traslado</span><span class="rest-val">A pie desde pro shop</span></div>
+      <span class="rest-day-tag">Desayuno todos los días de golf</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════ SCORES ════════════════ -->
+<div id="scores" class="page">
+  <p class="section-title">Scores</p>
+  <div class="rounds-nav" id="roundsNav"></div>
+  <div class="edit-toggle">
+    <button class="btn-edit" id="btnEdit" onclick="toggleEdit()">Editar scores</button>
+    <button class="btn-save" id="btnSave" onclick="saveScores()">Guardar</button>
+  </div>
+  <div class="score-wrap">
+    <div class="edit-hint" id="editHint" style="display:none;">Ingresá el gross de cada jugador. El net se calcula automáticamente.</div>
+    <table class="score-table">
+      <thead>
+        <tr>
+          <th style="width:36px">#</th>
+          <th>Jugador</th>
+          <th style="text-align:center;width:44px">HCP</th>
+          <th style="text-align:center;width:64px">Gross</th>
+          <th style="text-align:center;width:52px">Net</th>
+          <th style="text-align:right;width:52px">+/−</th>
+        </tr>
+      </thead>
+      <tbody id="scoreBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ════════════════ RANKING ════════════════ -->
+<div id="ranking" class="page">
+  <p class="section-title">Ranking general</p>
+  <div class="metrics-row" id="metricsRow"></div>
+  <div class="rank-list" id="rankList"></div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<div class="footer">Casa de Campo · La Romana, República Dominicana · Abril 2026</div>
+
+<script>
+const PLAYERS = [
+  { name:'Rodolfo B.',   hcp:12, av:'RB', bg:'#B5D4F4', tx:'#0C447C' },
+  { name:'Carlos M.',    hcp:8,  av:'CM', bg:'#9FE1CB', tx:'#085041' },
+  { name:'Alejandro V.', hcp:18, av:'AV', bg:'#F5C4B3', tx:'#712B13' },
+  { name:'Jorge P.',     hcp:15, av:'JP', bg:'#FAC775', tx:'#633806' },
+  { name:'Miguel S.',    hcp:10, av:'MS', bg:'#CECBF6', tx:'#3C3489' },
+  { name:'Luis F.',      hcp:22, av:'LF', bg:'#C0DD97', tx:'#27500A' },
+  { name:'Roberto A.',   hcp:6,  av:'RA', bg:'#F4C0D1', tx:'#72243E' },
+  { name:'Andrés G.',    hcp:14, av:'AG', bg:'#D3D1C7', tx:'#444441' },
+  { name:'Felipe R.',    hcp:9,  av:'FR', bg:'#85B7EB', tx:'#0C447C' },
+  { name:'Eduardo N.',   hcp:20, av:'EN', bg:'#5DCAA5', tx:'#04342C' },
+  { name:'Diego C.',     hcp:11, av:'DC', bg:'#EF9F27', tx:'#412402' },
+  { name:'Patricio O.',  hcp:16, av:'PO', bg:'#F0997B', tx:'#4A1B0C' },
+  { name:'Sebastián L.', hcp:7,  av:'SL', bg:'#97C459', tx:'#173404' },
+  { name:'Nicolás T.',   hcp:13, av:'NT', bg:'#AFA9EC', tx:'#26215C' },
+];
+
+const ROUNDS = [
+  { id:'r1', label:'Vie 17', course:'The Links',        par:72 },
+  { id:'r2', label:'Dom 19', course:'Teeth of the Dog', par:72 },
+  { id:'r3', label:'Lun 20', course:'Dye Fore',         par:72 },
+  { id:'r4', label:'Mar 21', course:'Teeth of the Dog', par:72 },
+];
+
+const STORAGE_KEY = 'cdc2026_scores';
+
+function seededRand(seed){
+  let s = seed;
+  return ()=>{ s=(s*16807)%2147483647; return s/2147483647; };
+}
+
+function initScores(){
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if(saved) return JSON.parse(saved);
+  const data = {};
+  ROUNDS.forEach((r,ri)=>{
+    data[r.id] = PLAYERS.map((p,pi)=>{
+      const rnd = seededRand(pi*97+ri*31);
+      const g = Math.max(68, Math.min(96, Math.round(72+(p.hcp*0.65)-3+(rnd()-0.5)*9)));
+      return { gross: g };
+    });
+  });
+  return data;
+}
+
+let SCORES = initScores();
+let activeRound = 'r1';
+let editMode = false;
+
+function net(gross, hcp){ return gross - Math.round(hcp*0.85); }
+
+function saveToStorage(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(SCORES)); }
+
+function showPage(id, btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(btn) btn.classList.add('active');
+  if(id==='scores'){ renderRoundsNav(); renderScores(); }
+  if(id==='ranking') renderRanking();
+}
+
+function renderRoundsNav(){
+  document.getElementById('roundsNav').innerHTML = ROUNDS.map(r=>
+    `<button class="round-btn ${r.id===activeRound?'active':''}" onclick="setRound('${r.id}')">${r.label}<br><span style="font-size:10px;opacity:.7">${r.course}</span></button>`
+  ).join('');
+}
+
+function setRound(id){
+  activeRound = id;
+  if(editMode) toggleEdit(); // exit edit on round change
+  renderRoundsNav();
+  renderScores();
+}
+
+function toggleEdit(){
+  editMode = !editMode;
+  const btn = document.getElementById('btnEdit');
+  const save = document.getElementById('btnSave');
+  const hint = document.getElementById('editHint');
+  btn.textContent = editMode ? 'Cancelar' : 'Editar scores';
+  btn.classList.toggle('active', editMode);
+  save.classList.toggle('show', editMode);
+  hint.style.display = editMode ? 'block' : 'none';
+  renderScores();
+}
+
+function saveScores(){
+  // read inputs back into SCORES
+  const round = SCORES[activeRound];
+  PLAYERS.forEach((p,i)=>{
+    const inp = document.getElementById('inp_'+i);
+    if(inp){
+      const v = parseInt(inp.value);
+      if(!isNaN(v) && v>=50 && v<=130) round[i].gross = v;
+    }
+  });
+  saveToStorage();
+  editMode = false;
+  document.getElementById('btnEdit').textContent = 'Editar scores';
+  document.getElementById('btnEdit').classList.remove('active');
+  document.getElementById('btnSave').classList.remove('show');
+  document.getElementById('editHint').style.display = 'none';
+  renderScores();
+  renderRanking();
+  showToast('Scores guardados');
+}
+
+function renderScores(){
+  const round = ROUNDS.find(r=>r.id===activeRound);
+  const data = SCORES[activeRound].map((s,i)=>({ ...s, ...PLAYERS[i], idx:i }));
+  const sorted = [...data].sort((a,b)=> net(a.gross,a.hcp) - net(b.gross,b.hcp));
+
+  let html = '';
+  sorted.forEach((row,pos)=>{
+    const n = net(row.gross, row.hcp);
+    const diff = n - round.par;
+    const ds = diff===0 ? 'E' : (diff>0?'+'+diff:String(diff));
+    const dc = diff<0?'under': diff>0?'over':'even';
+    const grossCell = editMode
+      ? `<input id="inp_${row.idx}" class="edit-score-input" type="number" min="50" max="130" value="${row.gross}">`
+      : `<span style="font-size:13px;font-weight:500">${row.gross}</span>`;
+    html += `<tr>
+      <td><div class="score-cell"><span class="score-pos">${pos+1}</span></div></td>
+      <td><div class="score-cell">
+        <div class="score-avatar" style="background:${row.bg};color:${row.tx}">${row.av}</div>
+        <span class="score-name">${row.name}</span>
+      </div></td>
+      <td style="text-align:center"><div class="score-cell" style="justify-content:center"><span style="font-size:12px;color:#B4B2A9">${row.hcp}</span></div></td>
+      <td style="text-align:center"><div class="score-cell" style="justify-content:center">${grossCell}</div></td>
+      <td style="text-align:center"><div class="score-cell" style="justify-content:center"><span class="score-num">${n}</span></div></td>
+      <td style="text-align:right"><div class="score-cell" style="justify-content:flex-end"><span class="score-diff ${dc}">${ds}</span></div></td>
+    </tr>`;
+  });
+  document.getElementById('scoreBody').innerHTML = html;
+}
+
+function renderRanking(){
+  const totals = PLAYERS.map((p,i)=>{
+    let total = 0;
+    ROUNDS.forEach(r=>{ total += net(SCORES[r.id][i].gross, p.hcp); });
+    return { ...p, total, idx:i };
+  }).sort((a,b)=>a.total-b.total);
+
+  const best = totals[0].total;
+  const worst = totals[totals.length-1].total;
+  const avgNet = Math.round(totals.reduce((a,b)=>a+b.total,0)/totals.length/4);
+
+  // metrics
+  const metrics = [
+    { label:'Líder', val: totals[0].name.split(' ')[0], sub:`Net total: ${totals[0].total}` },
+    { label:'Promedio net', val: avgNet, sub:'por ronda' },
+    { label:'Rondas', val: 4, sub:'The Links, Teeth ×2, Dye Fore' },
+  ];
+  document.getElementById('metricsRow').innerHTML = metrics.map(m=>
+    `<div class="metric-card">
+      <div class="metric-label">${m.label}</div>
+      <div class="metric-val">${m.val}</div>
+      <div class="metric-sub">${m.sub}</div>
+    </div>`
+  ).join('');
+
+  const posLabel = i => i===0?'1°':i===1?'2°':i===2?'3°':`${i+1}°`;
+  const posClass = i => i===0?'gold':i===1?'silver':i===2?'bronze':'';
+
+  document.getElementById('rankList').innerHTML = totals.map((p,i)=>{
+    const bar = Math.max(6, Math.round(100-((p.total-best)/(worst-best+0.01))*80));
+    const diff = p.total - best;
+    return `<div class="rank-row">
+      <div class="rank-pos ${posClass(i)}">${posLabel(i)}</div>
+      <div class="rank-avatar" style="background:${p.bg};color:${p.tx}">${p.av}</div>
+      <div class="rank-info">
+        <div class="rank-name">${p.name}</div>
+        <div class="rank-sub">HCP ${p.hcp} · ${i===0?'Líder':'+'+diff+' del líder'}</div>
+        <div class="rank-bar-wrap"><div class="rank-bar" style="width:${bar}%"></div></div>
+      </div>
+      <div class="rank-total ${i===0?'lead':'trail'}">${p.total}</div>
+    </div>`;
+  }).join('');
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+// Init
+renderRanking();
+</script>
+</body>
+</html>
