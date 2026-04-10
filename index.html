@@ -508,6 +508,7 @@ body {
 <nav class="nav">
   <button class="nav-btn active" onclick="showPage('itinerario',this)">Itinerario</button>
   <button class="nav-btn" onclick="showPage('restaurantes',this)">Restaurantes</button>
+  <button class="nav-btn" onclick="showPage('bares',this)">Bares</button>
   <button class="nav-btn" onclick="showPage('scores',this)">Scores</button>
   <button class="nav-btn" onclick="showPage('ranking',this)">Ranking</button>
 </nav>
@@ -544,7 +545,8 @@ body {
       <div class="sched-row">
         <div class="sched-time">19:00</div>
         <div class="sched-main">
-          <div class="sched-text">Reunión de grupo — Bar</div>
+          <div class="sched-text">Reunión de grupo</div>
+          <div><span class="rest-pill">La Caña Bar · Música en vivo · Rones dominicanos</span></div>
         </div>
       </div>
       <div class="sched-row">
@@ -584,15 +586,15 @@ body {
       </div>
       <div class="sched-row">
         <div class="sched-time">13:30</div>
-        <div class="sched-main"><div class="sched-text">Fin de golf — Hoyo 19</div></div>
+        <div class="sched-main"><div class="sched-text">Fin de golf</div><div class="sched-sub">The 19th Hole · Snacks y drinks frente al campo</div></div>
       </div>
       <div class="sched-row">
         <div class="sched-time">15:00</div>
-        <div class="sched-main"><div class="sched-text">Relax — Piscina</div></div>
+        <div class="sched-main"><div class="sched-text">Relax — Piscina</div><div class="sched-sub">La Caña Pool Bar disponible</div></div>
       </div>
       <div class="sched-row">
         <div class="sched-time">19:00</div>
-        <div class="sched-main"><div class="sched-text">Reunión previa — Bar</div></div>
+        <div class="sched-main"><div class="sched-text">Previos</div><div><span class="rest-pill">La Caña Bar · Música en vivo · Abre hasta 1am</span></div></div>
       </div>
       <div class="sched-row">
         <div class="sched-time">20:00</div>
@@ -616,6 +618,13 @@ body {
     </div>
     <div class="day-body">
       <div class="sched-row">
+        <div class="sched-time">09:00</div>
+        <div class="sched-main">
+          <div class="sched-text">Mañana libre — Playa Minitas</div>
+          <div><span class="rest-pill">Cocomar Beach Bar · Frente al mar · Abre 9am</span></div>
+        </div>
+      </div>
+      <div class="sched-row">
         <div class="sched-time">13:00</div>
         <div class="sched-main">
           <div class="sched-text">Visita — Altos de Chavón</div>
@@ -624,7 +633,7 @@ body {
       </div>
       <div class="sched-row">
         <div class="sched-time">19:00</div>
-        <div class="sched-main"><div class="sched-text">Previos — Bar</div></div>
+        <div class="sched-main"><div class="sched-text">Previos</div><div><span class="rest-pill">Dye Fore Bar · Altos de Chavón · Vista al cañón</span></div></div>
       </div>
       <div class="sched-row">
         <div class="sched-time">20:00</div>
@@ -885,6 +894,92 @@ body {
       <div class="rest-meta"><span class="rest-label">Reserva</span><span class="rest-val">No requiere</span></div>
       <div class="rest-meta"><span class="rest-label">Traslado</span><span class="rest-val">A pie desde pro shop</span></div>
       <span class="rest-day-tag">Desayuno todos los días de golf</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════ BARES ════════════════ -->
+<div id="bares" class="page">
+  <p class="section-title">Bares</p>
+  <div class="rest-grid">
+
+    <div class="rest-card featured">
+      <div class="rest-card-top">
+        <div class="rest-card-name">La Caña Bar</div>
+        <div class="rest-stars">★★★★★</div>
+      </div>
+      <div class="rest-cuisine">Bar principal del hotel · El centro de reunión del grupo</div>
+      <div class="rest-meta"><span class="rest-label">Horario</span><span class="rest-val">6am–1am todos los días</span></div>
+      <div class="rest-meta"><span class="rest-label">Ambiente</span><span class="rest-val">Música en vivo, rones dominicanos, cigarros</span></div>
+      <div class="rest-meta"><span class="rest-label">Traslado</span><span class="rest-val">A pie desde lobby</span></div>
+      <div class="rest-meta"><span class="rest-label">Ideal para</span><span class="rest-val">Previos de cada noche, reunión de grupo</span></div>
+      <span class="rest-day-tag">Todos los días — previos 7pm</span>
+    </div>
+
+    <div class="rest-card">
+      <div class="rest-card-top">
+        <div class="rest-card-name">The 19th Hole</div>
+        <div class="rest-stars">★★★★</div>
+      </div>
+      <div class="rest-cuisine">Bar del golf · Pro Shop de Teeth of the Dog</div>
+      <div class="rest-meta"><span class="rest-label">Horario</span><span class="rest-val">9am–7pm todos los días</span></div>
+      <div class="rest-meta"><span class="rest-label">Ambiente</span><span class="rest-val">Sandwiches, snacks, drinks post-ronda</span></div>
+      <div class="rest-meta"><span class="rest-label">Traslado</span><span class="rest-val">A pie desde el hoyo 18</span></div>
+      <div class="rest-meta"><span class="rest-label">Ideal para</span><span class="rest-val">Después de cada ronda de golf</span></div>
+      <span class="rest-day-tag">Vie 17, Dom 19, Lun 20, Mar 21 — 1:30pm</span>
+    </div>
+
+    <div class="rest-card">
+      <div class="rest-card-top">
+        <div class="rest-card-name">La Caña Pool Bar</div>
+        <div class="rest-stars">★★★★</div>
+      </div>
+      <div class="rest-cuisine">Bar de piscina · Zona del hotel</div>
+      <div class="rest-meta"><span class="rest-label">Horario</span><span class="rest-val">Durante el día</span></div>
+      <div class="rest-meta"><span class="rest-label">Ambiente</span><span class="rest-val">Piscina principal, cócteles, vista a jardines</span></div>
+      <div class="rest-meta"><span class="rest-label">Traslado</span><span class="rest-val">A pie desde habitaciones</span></div>
+      <div class="rest-meta"><span class="rest-label">Ideal para</span><span class="rest-val">Relax de tarde después del golf — 3pm slot</span></div>
+      <span class="rest-day-tag">Días de golf — 3pm a 6pm</span>
+    </div>
+
+    <div class="rest-card">
+      <div class="rest-card-top">
+        <div class="rest-card-name">Cocomar</div>
+        <div class="rest-stars">★★★★</div>
+      </div>
+      <div class="rest-cuisine">Beach bar · Playa Minitas</div>
+      <div class="rest-meta"><span class="rest-label">Horario</span><span class="rest-val">9am–11pm todos los días</span></div>
+      <div class="rest-meta"><span class="rest-label">Ambiente</span><span class="rest-val">Frente al Caribe, cócteles, música tropical</span></div>
+      <div class="rest-meta"><span class="rest-label">Traslado</span><span class="rest-val">Golf cart ~10 min desde hotel</span></div>
+      <div class="rest-meta"><span class="rest-label">Ideal para</span><span class="rest-val">Mañana del día libre en la playa</span></div>
+      <span class="rest-day-tag">Sáb 18 — mañana libre</span>
+    </div>
+
+    <div class="rest-card">
+      <div class="rest-card-top">
+        <div class="rest-card-name">Dye Fore Bar</div>
+        <div class="rest-stars">★★★★</div>
+      </div>
+      <div class="rest-cuisine">Bar con vista · Altos de Chavón</div>
+      <div class="rest-meta"><span class="rest-label">Horario</span><span class="rest-val">Durante el día y noche</span></div>
+      <div class="rest-meta"><span class="rest-label">Ambiente</span><span class="rest-val">Vista panorámica al Río Chavón y el Caribe</span></div>
+      <div class="rest-meta"><span class="rest-label">Traslado</span><span class="rest-val">Golf cart ~15 min, subida a Altos de Chavón</span></div>
+      <div class="rest-meta"><span class="rest-label">Ideal para</span><span class="rest-val">Previos del sábado antes de La Piazzetta</span></div>
+      <span class="rest-day-tag">Sáb 18 — previos 7pm</span>
+    </div>
+
+    <div class="rest-card">
+      <div class="rest-card-top">
+        <div class="rest-card-name">Villa Minuty</div>
+        <div class="rest-stars">★★★</div>
+      </div>
+      <div class="rest-cuisine">Bar boutique · Hotel principal</div>
+      <div class="rest-meta"><span class="rest-label">Horario</span><span class="rest-val">Tarde y noche</span></div>
+      <div class="rest-meta"><span class="rest-label">Ambiente</span><span class="rest-val">Íntimo, selección de vinos y cócteles finos</span></div>
+      <div class="rest-meta"><span class="rest-label">Traslado</span><span class="rest-val">A pie desde lobby</span></div>
+      <div class="rest-meta"><span class="rest-label">Ideal para</span><span class="rest-val">Copa de vino tranquila, alternativa a La Caña</span></div>
+      <span class="rest-day-tag">Cualquier noche</span>
     </div>
 
   </div>
